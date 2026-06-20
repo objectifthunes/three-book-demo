@@ -4,7 +4,7 @@ import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { PropTable } from '@/components/PropTable'
 import { findExport } from '@/components/exports'
-import { LiveBook } from '@/components/live/examples'
+import { LiveSpread } from '@/components/live/examples'
 
 const e = findExport('/content/spreads/')!
 
@@ -55,7 +55,7 @@ function frame() {
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
-      <LiveBook pageCount={10} hint="Drag through the book — the source below shows how SpreadContent spans one image across a facing pair" />
+      <LiveSpread />
       <Source code={CODE} lang="ts" />
       <PropTable
         label="CONSTRUCTOR — SpreadContentOptions"

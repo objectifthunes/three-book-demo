@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { BookContent, createPageTexture, type ImageRect } from '@objectifthunes/three-book'
+import { BookContent, BookDirection, createPageTexture, type ImageRect } from '@objectifthunes/three-book'
 
 export interface PagesConfig {
   pageCount?: number
@@ -34,14 +34,21 @@ export function buildBookContent(cfg: PagesConfig = {}): BuiltContent {
   const coverW = pageW + 0.1
   const coverH = pageH + 0.1
   const content = new BookContent()
+  content.direction = BookDirection.LeftToRight
+  // Exactly four cover surfaces: front-outer, front-inner, back-inner, back-outer.
+  const covers: (THREE.Texture | null)[] = []
   for (let i = 0; i < 4; i++) {
     const label = cfg.coverLabel ? cfg.coverLabel(i) : DEFAULT_COVERS[i]
-    content.covers.push(track(createPageTexture(coverColor, label, null, 'contain', false, coverW, coverH)))
+    covers.push(track(createPageTexture(coverColor, label, null, 'contain', false, coverW, coverH)))
   }
+  content.covers = covers
+  // N distinct numbered pages.
+  const pages: (THREE.Texture | null)[] = []
   for (let i = 0; i < pageCount; i++) {
     const label = cfg.pageLabel ? cfg.pageLabel(i) : `Page ${i + 1}`
-    content.pages.push(track(createPageTexture(pageColor, label, null, 'contain', false, pageW, pageH)))
+    pages.push(track(createPageTexture(pageColor, label, null, 'contain', false, pageW, pageH)))
   }
+  content.pages = pages
   return { content, textures }
 }
 
