@@ -4,6 +4,7 @@ import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { PropTable } from '@/components/PropTable'
 import { findExport } from '@/components/exports'
+import { LiveAutoTurn } from '@/components/live/examples'
 
 const e = findExport('/reference/enums/')!
 
@@ -27,6 +28,7 @@ settings.mode = AutoTurnMode.Edge`
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
+      <LiveAutoTurn />
       <Source code={CODE} lang="ts" />
 
       <PropTable

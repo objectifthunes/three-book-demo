@@ -3,6 +3,7 @@ import { ExportPage } from '@/components/ExportPage'
 import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { findExport } from '@/components/exports'
+import { LiveBook } from '@/components/live/examples'
 
 const e = findExport('/start/quick-start/')!
 
@@ -45,6 +46,7 @@ animate()`
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
+      <LiveBook />
       <Source code={INSTALL} lang="bash" />
       <Source code={CODE} lang="ts" />
       <Notes>
@@ -56,7 +58,7 @@ export default async function Page() {
         <p>
           To turn pages by dragging, add <Link href="/turning/interaction/">BookPointerInteraction</Link>. To skip
           the boilerplate in step 1 entirely, use <Link href="/demokit/demo-scene/">createDemoScene()</Link> from
-          the <code>/demo-kit</code> entry — that is exactly what the <Link href="/live/minimal/">live demos</Link>{' '}
+          the <code>/demo-kit</code> entry — that is exactly what the <Link href="/start/playground/">playground</Link>{' '}
           do. When you tear the book down, always call <Link href="/book/lifecycle/"><code>book.dispose()</code></Link>.
         </p>
       </Notes>

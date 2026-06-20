@@ -3,8 +3,8 @@ import { ExportPage } from '@/components/ExportPage'
 import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { PropTable } from '@/components/PropTable'
-import { FullScreenPreview } from '@/components/Preview'
 import { findExport } from '@/components/exports'
+import { LiveBook } from '@/components/live/examples'
 
 const e = findExport('/demokit/demo-panel/')!
 
@@ -46,6 +46,7 @@ panel.switchTab('textures') // programmatically change tab`
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
+      <LiveBook />
       <Source code={CODE} lang="ts" />
       <PropTable
         label="createDemoPanel — config & return"
@@ -93,7 +94,6 @@ export default async function Page() {
           <code>createImageSlotCard</code> from the same <Link href="/demokit/overview/">demo-kit</Link>.
         </p>
       </Notes>
-      <FullScreenPreview href="/full/editor/" illustration={null} />
     </ExportPage>
   )
 }

@@ -3,8 +3,8 @@ import { ExportPage } from '@/components/ExportPage'
 import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { PropTable } from '@/components/PropTable'
-import { FullScreenPreview } from '@/components/Preview'
 import { findExport } from '@/components/exports'
+import { LiveBook } from '@/components/live/examples'
 
 const e = findExport('/demokit/overview/')!
 
@@ -60,6 +60,7 @@ animate()`
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
+      <LiveBook />
       <Source code={CODE} lang="ts" />
       <PropTable
         label="WHAT'S INSIDE"
@@ -80,7 +81,7 @@ export default async function Page() {
         <p>
           <code>/demo-kit</code> is an <em>optional</em>, batteries-included layer that sits on top of{' '}
           <code>@objectifthunes/three-book</code>. None of it is needed to render a book — but it is exactly
-          what powers this site&apos;s <Link href="/live/editor/">live editor</Link>, so it gets you from zero
+          what powers this site&apos;s <Link href="/start/playground/">playground</Link>, so it gets you from zero
           to an interactive demo in a handful of lines.
         </p>
         <p>
@@ -97,7 +98,6 @@ export default async function Page() {
           <Link href="/textures/images/">Images &amp; fit</Link>.
         </p>
       </Notes>
-      <FullScreenPreview href="/full/editor/" illustration={null} />
     </ExportPage>
   )
 }

@@ -3,9 +3,8 @@ import { ExportPage } from '@/components/ExportPage'
 import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { PropTable } from '@/components/PropTable'
-import { FullScreenPreview } from '@/components/Preview'
 import { findExport } from '@/components/exports'
-import { BookOpen } from 'lucide-react'
+import { LiveBook } from '@/components/live/examples'
 
 const e = findExport('/turning/interaction/')!
 
@@ -54,6 +53,7 @@ if (book.startTurning(ray)) {   // grabs the page under the ray, if any
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
+      <LiveBook hint="Drag a page to turn it (BookPointerInteraction) · drag the background to orbit" />
       <Source code={CODE} lang="ts" />
       <PropTable
         label="BookPointerInteraction"
@@ -98,7 +98,6 @@ export default async function Page() {
           flight see <Link href="/book/state/">Reading state</Link>.
         </p>
       </Notes>
-      <FullScreenPreview href="/full/editor/" illustration={<BookOpen size={40} strokeWidth={1.25} />} />
     </ExportPage>
   )
 }

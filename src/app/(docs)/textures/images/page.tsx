@@ -4,6 +4,7 @@ import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { PropTable } from '@/components/PropTable'
 import { findExport } from '@/components/exports'
+import { LiveTextures } from '@/components/live/examples'
 
 const e = findExport('/textures/images/')!
 
@@ -50,6 +51,7 @@ URL.revokeObjectURL(objectUrl)`
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
+      <LiveTextures />
       <Source code={CODE} lang="ts" />
       <PropTable
         label="FUNCTIONS"

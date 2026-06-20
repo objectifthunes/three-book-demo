@@ -3,6 +3,7 @@ import { ArrowDownToLine, BookOpen, Code2, PlayCircle } from 'lucide-react'
 import { CodeBlock } from '@/components/CodeBlock'
 import { Eyebrow } from '@/components/Eyebrow'
 import { GROUPS, exportsByGroup, LIB_VERSION, NPM_URL } from '@/components/exports'
+import { LiveBook } from '@/components/live/examples'
 
 const INSTALL = `pnpm add @objectifthunes/three-book three`
 
@@ -45,10 +46,14 @@ export default async function HomePage() {
           editable text. Every export documented, with working examples you can run in the browser.
         </p>
         <div className="landing__hero-actions">
-          <Link className="landing__cta landing__cta--primary" href="/full/editor/">Open the live editor ↗</Link>
+          <Link className="landing__cta landing__cta--primary" href="/start/playground/">Open the playground ↗</Link>
           <Link className="landing__cta" href="/start/quick-start/">Quick start</Link>
           <a className="landing__cta" href={NPM_URL} target="_blank" rel="noopener noreferrer">npm</a>
         </div>
+      </section>
+
+      <section className="landing__block">
+        <LiveBook hint="Live, right here — drag a page to turn it · drag the background to orbit" />
       </section>
 
       <section>
@@ -82,15 +87,15 @@ export default async function HomePage() {
         <div className="landing__skill-header">
           <div>
             <Eyebrow icon={<PlayCircle size={12} strokeWidth={1.75} />}>SEE IT MOVE</Eyebrow>
-            <h2 className="landing__skill-title">Two live demos, no install.</h2>
+            <h2 className="landing__skill-title">Live, all the way down.</h2>
           </div>
-          <Link className="landing__skill-cta" href="/full/editor/">Open editor</Link>
+          <Link className="landing__skill-cta" href="/start/playground/">Open playground</Link>
         </div>
         <p style={{ color: 'var(--ot-text-secondary)', fontSize: 14 }}>
-          The <strong>Interactive editor</strong> is the full studio: tune paper geometry, drop in cover and
-          page images, toggle spreads, and edit text blocks WYSIWYG — all rendering live. The{' '}
-          <strong>Minimal book</strong> is the opposite end: the smallest setup that still turns. Drag a page
-          in either to feel the curl.
+          Every page on this site embeds the feature it documents as a real, interactive 3D example — drag a page
+          on the <strong>Book</strong> page, hit auto-turn buttons under <strong>Turning</strong>, scrub the open
+          slider, tune geometry in the <strong>Playground</strong>. Each runs inline on its own contained
+          <code> WebGLRenderer</code>, composed from the published package — no separate app, no full-screen detour.
         </p>
         <ul className="landing__skill-bullets">
           <li>Drag pages to turn — physical curl + fall settling</li>

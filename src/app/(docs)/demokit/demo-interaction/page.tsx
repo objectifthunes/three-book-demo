@@ -4,6 +4,7 @@ import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { PropTable } from '@/components/PropTable'
 import { findExport } from '@/components/exports'
+import { LiveBook } from '@/components/live/examples'
 
 const e = findExport('/demokit/demo-interaction/')!
 
@@ -34,6 +35,7 @@ function setInteractive(on: boolean) {
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
+      <LiveBook />
       <Source code={CODE} lang="ts" />
       <PropTable
         label="ARGUMENTS"

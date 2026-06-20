@@ -4,6 +4,7 @@ import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { PropTable } from '@/components/PropTable'
 import { findExport } from '@/components/exports'
+import { LiveGeometry } from '@/components/live/examples'
 
 const e = findExport('/binding/paper-setup/')!
 
@@ -46,6 +47,7 @@ pages.uvMargin       // PaperUVMargin, oriented by bookDirection`
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
+      <LiveGeometry />
       <Source code={CODE} lang="ts" />
       <PropTable
         label="PaperSetup CONSTRUCTOR OPTIONS"

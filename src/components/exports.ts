@@ -23,7 +23,6 @@ export type GroupId =
   | 'binding'
   | 'demokit'
   | 'reference'
-  | 'live'
 
 export const GROUPS: { id: GroupId; label: string }[] = [
   { id: 'start',     label: 'Getting started' },
@@ -34,13 +33,13 @@ export const GROUPS: { id: GroupId; label: string }[] = [
   { id: 'binding',   label: 'Binding'         },
   { id: 'demokit',   label: 'Demo kit'        },
   { id: 'reference', label: 'Reference'       },
-  { id: 'live',      label: 'Live demos'      },
 ]
 
 export const EXPORTS: ExportEntry[] = [
   // Getting started
   { slug: 'quick-start', name: 'Quick start', group: 'start', href: '/start/quick-start/', lede: 'Mount a realistic 3D page-turning book into a Three.js scene in about twenty lines.' },
   { slug: 'concepts',    name: 'Core concepts', group: 'start', href: '/start/concepts/', lede: 'Papers, content, binding, the update loop — the mental model behind every other page.' },
+  { slug: 'playground',  name: 'Playground', group: 'start', href: '/start/playground/', lede: 'A live geometry playground — tune the book’s pages, thickness, stiffness and colours and feel it turn.' },
 
   // The Book
   { slug: 'book-class', name: 'Book', group: 'book', href: '/book/book-class/', lede: 'The headline class. Construct it, add its root to your scene, and tick it every frame.', badge: 'CLASS' },
@@ -78,10 +77,6 @@ export const EXPORTS: ExportEntry[] = [
   { slug: 'enums', name: 'Enums', group: 'reference', href: '/reference/enums/', lede: 'BookDirection, AutoTurnDirection, AutoTurnMode and the auto-turn setting modes.', badge: 'TYPE' },
   { slug: 'types', name: 'Types index', group: 'reference', href: '/reference/types/', lede: 'A one-stop map of the option types and interfaces, with where each is used.', badge: 'TYPE' },
   { slug: 'performance', name: 'Performance flags', group: 'reference', href: '/reference/performance/', lede: 'reduceShadows, reduceSubMeshes, reduceOverdraw, castShadows — what each trades away.' },
-
-  // Live demos
-  { slug: 'editor', name: 'Interactive editor', group: 'live', href: '/live/editor/', lede: 'The full three-book studio: tune geometry, drop in textures, and edit pages WYSIWYG.', badge: 'FULL-SCREEN' },
-  { slug: 'minimal', name: 'Minimal book', group: 'live', href: '/live/minimal/', lede: 'The smallest working setup — a bare book you can drag to turn.', badge: 'FULL-SCREEN' },
 ]
 
 export function groupOf(id: GroupId) {

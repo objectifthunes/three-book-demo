@@ -4,6 +4,7 @@ import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { PropTable } from '@/components/PropTable'
 import { findExport } from '@/components/exports'
+import { LiveOpenProgress } from '@/components/live/examples'
 
 const e = findExport('/turning/open-progress/')!
 
@@ -31,6 +32,7 @@ book.setOpenProgressByIndex(4)   // open at the 4th paper side`
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
+      <LiveOpenProgress />
       <Source code={CODE} lang="ts" />
       <PropTable
         label="METHODS"
