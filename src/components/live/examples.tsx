@@ -17,7 +17,16 @@ import {
 import { useBookStage } from './useBookStage'
 import { LiveStage } from './LiveStage'
 import { LiveRow, LiveButton, LiveSlider, LiveToggle, LiveSwatch, LiveReadout } from './controls'
-import { buildBookContent, pagePaperSetup, coverPaperSetup, loadPatternImage } from './book-content'
+import { buildBookContent, buildStorybookContent, loadStorybookArt, pagePaperSetup, coverPaperSetup, loadPatternImage } from './book-content'
+
+/** Load the illustrated storybook art once, then rebuild so it draws. */
+function useStorybookArt(rebuild: () => void) {
+  useEffect(() => {
+    let alive = true
+    loadStorybookArt().then(() => { if (alive) rebuild() })
+    return () => { alive = false }
+  }, [rebuild])
+}
 
 const PAGE_W = 2
 const PAGE_H = 3
@@ -63,15 +72,16 @@ export function LiveBook({
   hint = 'Drag a page to turn it · drag the background to orbit',
 }: { pageCount?: number; hint?: string }) {
   const ref = useRef<HTMLDivElement>(null)
-  useBookStage(ref, {
+  const { rebuild } = useBookStage(ref, {
     make: () => {
-      const { content, textures } = buildBookContent({ pageCount, pageColor: PAGE_COLOR, coverColor: COVER_COLOR })
+      const { content, textures } = buildStorybookContent(pageCount)
       const book = new Book({ content, ...baseOptions() })
       const open = makeOpenToPage(0)
       return { book, onFrame: () => open(book), cleanup: () => textures.forEach((t) => t.dispose()) }
     },
     deps: [pageCount],
   })
+  useStorybookArt(rebuild)
   return <LiveStage ref={ref} hint={hint} />
 }
 
@@ -79,14 +89,15 @@ export function LiveBook({
 export function LiveAutoTurn() {
   const ref = useRef<HTMLDivElement>(null)
   const settings = useMemo(() => new AutoTurnSettings(), [])
-  const { bookRef } = useBookStage(ref, {
+  const { bookRef, rebuild } = useBookStage(ref, {
     make: () => {
-      const { content, textures } = buildBookContent({ pageCount: 10, pageColor: PAGE_COLOR, coverColor: COVER_COLOR })
+      const { content, textures } = buildStorybookContent(10)
       const book = new Book({ content, ...baseOptions() })
       const open = makeOpenToPage(0)
       return { book, onFrame: () => open(book), cleanup: () => textures.forEach((t) => t.dispose()) }
     },
   })
+  useStorybookArt(rebuild)
   const turn = (dir: AutoTurnDirection, count = 1) => bookRef.current?.startAutoTurning(dir, settings, count)
   return (
     <LiveStage
@@ -108,13 +119,14 @@ export function LiveAutoTurn() {
 export function LiveOpenProgress() {
   const ref = useRef<HTMLDivElement>(null)
   const [v, setV] = useState(0)
-  const { bookRef } = useBookStage(ref, {
+  const { bookRef, rebuild } = useBookStage(ref, {
     make: () => {
-      const { content, textures } = buildBookContent({ pageCount: 8, pageColor: PAGE_COLOR, coverColor: COVER_COLOR })
+      const { content, textures } = buildStorybookContent(8)
       const book = new Book({ content, ...baseOptions() })
       return { book, cleanup: () => textures.forEach((t) => t.dispose()) }
     },
   })
+  useStorybookArt(rebuild)
   const onChange = (val: number) => { setV(val); bookRef.current?.setOpenProgress(val) }
   return (
     <LiveStage
@@ -128,14 +140,15 @@ export function LiveOpenProgress() {
 /** Read-only state, polled each frame off the live book. */
 export function LiveBookState() {
   const ref = useRef<HTMLDivElement>(null)
-  const { bookRef } = useBookStage(ref, {
+  const { bookRef, rebuild } = useBookStage(ref, {
     make: () => {
-      const { content, textures } = buildBookContent({ pageCount: 8, pageColor: PAGE_COLOR, coverColor: COVER_COLOR })
+      const { content, textures } = buildStorybookContent(8)
       const book = new Book({ content, ...baseOptions() })
       const open = makeOpenToPage(0)
       return { book, onFrame: () => open(book), cleanup: () => textures.forEach((t) => t.dispose()) }
     },
   })
+  useStorybookArt(rebuild)
   const [s, setS] = useState({ turning: false, falling: false, idle: true, progress: 0, papers: 0 })
   useEffect(() => {
     const id = setInterval(() => {
@@ -213,12 +226,13 @@ export function LiveBinding() {
   const [, force] = useState(0)
   const { rebuild } = useBookStage(ref, {
     make: () => {
-      const { content, textures } = buildBookContent({ pageCount: 8, pageColor: PAGE_COLOR, coverColor: COVER_COLOR })
+      const { content, textures } = buildStorybookContent(8)
       const book = new Book({ content, ...baseOptions({ hideBinder: hide.current }) })
       const open = makeOpenToPage(0)
       return { book, onFrame: () => open(book), cleanup: () => textures.forEach((t) => t.dispose()) }
     },
   })
+  useStorybookArt(rebuild)
   return (
     <LiveStage
       ref={ref}
