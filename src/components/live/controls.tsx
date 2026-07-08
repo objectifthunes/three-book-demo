@@ -71,6 +71,27 @@ export function LiveSwatch({ label, value, onChange }: {
   )
 }
 
+/** A labelled one-line text input — the WYSIWYG hook for live canvases. */
+export function LiveTextInput({ label, value, onChange, placeholder }: {
+  label: string
+  value: string
+  onChange: (v: string) => void
+  placeholder?: string
+}) {
+  return (
+    <label className="live-text">
+      <span className="live-text__label">{label}</span>
+      <input
+        type="text"
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        spellCheck={false}
+      />
+    </label>
+  )
+}
+
 export function LiveReadout({ label, value }: { label: string; value: ReactNode }) {
   return (
     <span className="live-readout">

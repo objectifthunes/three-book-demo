@@ -848,3 +848,46 @@ code, kbd, samp { font-family: var(--docs-mono); font-size: 0.85em; }
   .landing__grid { grid-template-columns: 1fr; }
   .landing__skill-bullets { grid-template-columns: 1fr; }
 }
+
+/* ── Playground CTA (snippet-first doc pages) ───────────── */
+.playground-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  margin: 0 0 0.4rem;
+  font-family: var(--docs-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--ot-text-secondary);
+  border: 1px dashed var(--ot-border);
+  border-radius: var(--ot-radius-lg);
+  background: var(--ot-surface-hover);
+}
+.playground-cta a { color: var(--ot-accent, #6d8dff); text-decoration: underline; text-underline-offset: 2px; }
+.playground-cta svg { flex: none; }
+
+/* ── Live text input (WYSIWYG fields) ───────────────────── */
+.live-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.live-text__label {
+  font-family: var(--docs-mono);
+  font-size: 11px;
+  color: var(--ot-text-muted);
+  white-space: nowrap;
+}
+.live-text input {
+  width: 200px;
+  padding: 0.32rem 0.55rem;
+  font-family: var(--docs-mono);
+  font-size: 11.5px;
+  color: var(--ot-text);
+  background: var(--ot-surface);
+  border: 1px solid var(--ot-border);
+  border-radius: 6px;
+  outline: none;
+}
+.live-text input:focus { border-color: var(--ot-accent, #6d8dff); }

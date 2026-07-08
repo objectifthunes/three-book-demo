@@ -1,10 +1,10 @@
 import Link from 'next/link'
+import { PlaygroundCta } from '@/components/PlaygroundCta'
 import { ExportPage } from '@/components/ExportPage'
 import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { PropTable } from '@/components/PropTable'
 import { findExport } from '@/components/exports'
-import { LiveBook } from '@/components/live/examples'
 
 const e = findExport('/book/lifecycle/')!
 
@@ -47,7 +47,7 @@ function unmount(scene: THREE.Scene) {
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
-      <LiveBook />
+      <PlaygroundCta />
       <Source code={CODE} lang="ts" />
       <PropTable
         label="LIFECYCLE METHODS"

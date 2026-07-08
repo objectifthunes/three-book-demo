@@ -1,10 +1,10 @@
 import Link from 'next/link'
+import { PlaygroundCta } from '@/components/PlaygroundCta'
 import { ExportPage } from '@/components/ExportPage'
 import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { PropTable } from '@/components/PropTable'
 import { findExport } from '@/components/exports'
-import { LiveGeometry } from '@/components/live/examples'
 
 const e = findExport('/book/book-options/')!
 
@@ -24,7 +24,7 @@ const book = new Book({
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
-      <LiveGeometry />
+      <PlaygroundCta />
       <Source code={CODE} lang="ts" />
       <PropTable
         rows={[

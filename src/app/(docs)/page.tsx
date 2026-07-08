@@ -1,9 +1,9 @@
 import Link from 'next/link'
+import { PlaygroundCta } from '@/components/PlaygroundCta'
 import { ArrowDownToLine, BookOpen, Code2, PlayCircle } from 'lucide-react'
 import { CodeBlock } from '@/components/CodeBlock'
 import { Eyebrow } from '@/components/Eyebrow'
 import { GROUPS, exportsByGroup, LIB_VERSION, NPM_URL } from '@/components/exports'
-import { LiveBook } from '@/components/live/examples'
 
 const INSTALL = `pnpm add @objectifthunes/three-book three`
 
@@ -53,7 +53,7 @@ export default async function HomePage() {
       </section>
 
       <section className="landing__block">
-        <LiveBook hint="Live, right here — drag a page to turn it · drag the background to orbit" />
+        <PlaygroundCta />
       </section>
 
       <section>

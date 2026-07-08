@@ -22,7 +22,7 @@ export const GROUP_ICONS: Record<GroupId, LucideIcon> = {
   binding:   Layers,
   demokit:   SlidersHorizontal,
   reference: Wrench,
-  live:      PlayCircle,
+  play:      PlayCircle,
 }
 
 /** Use this for sidebar nav items + group eyebrows. */

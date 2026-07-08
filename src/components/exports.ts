@@ -15,6 +15,7 @@ export interface ExportEntry {
 }
 
 export type GroupId =
+  | 'play'
   | 'start'
   | 'book'
   | 'turning'
@@ -25,6 +26,7 @@ export type GroupId =
   | 'reference'
 
 export const GROUPS: { id: GroupId; label: string }[] = [
+  { id: 'play',      label: 'Playgrounds'     },
   { id: 'start',     label: 'Getting started' },
   { id: 'book',      label: 'The Book'        },
   { id: 'turning',   label: 'Turning pages'   },
@@ -36,10 +38,13 @@ export const GROUPS: { id: GroupId; label: string }[] = [
 ]
 
 export const EXPORTS: ExportEntry[] = [
+  // Playgrounds — the two flagship canvases; every other page is snippet-first.
+  { slug: 'staple', name: 'Staple playground', group: 'play', href: '/play/staple/', lede: 'The magazine binding with every option live: paper, staples, turning, and text you type straight onto the book.', badge: 'FULL-SCREEN' },
+  { slug: 'hardcover', name: 'Hardcover playground', group: 'play', href: '/play/hardcover/', lede: 'The glued case binding with every option live: rigid boards, spine setup, turning, and WYSIWYG titles.', badge: 'FULL-SCREEN' },
+
   // Getting started
   { slug: 'quick-start', name: 'Quick start', group: 'start', href: '/start/quick-start/', lede: 'Mount a realistic 3D page-turning book into a Three.js scene in about twenty lines.' },
   { slug: 'concepts',    name: 'Core concepts', group: 'start', href: '/start/concepts/', lede: 'Papers, content, binding, the update loop — the mental model behind every other page.' },
-  { slug: 'playground',  name: 'Playground', group: 'start', href: '/start/playground/', lede: 'A live geometry playground — tune the book’s pages, thickness, stiffness and colours and feel it turn.' },
 
   // The Book
   { slug: 'book-class', name: 'Book', group: 'book', href: '/book/book-class/', lede: 'The headline class. Construct it, add its root to your scene, and tick it every frame.', badge: 'CLASS' },
