@@ -7,6 +7,7 @@ import {
   BookContent,
   BookDirection,
   StapleBookBinding,
+  HardcoverBookBinding,
   SpreadContent,
   TextOverlayContent,
   createPageTexture,
@@ -242,6 +243,42 @@ export function LiveBinding() {
           label="hideBinder"
           checked={hide.current}
           onChange={(v) => { hide.current = v; force((n) => n + 1); rebuild() }}
+        />
+      }
+    />
+  )
+}
+
+/** The hardcover case: rigid boards, one smooth spine, pages glued to it. */
+export function LiveHardcover() {
+  const ref = useRef<HTMLDivElement>(null)
+  const staple = useRef(false)
+  const [, force] = useState(0)
+  const { rebuild } = useBookStage(ref, {
+    make: () => {
+      const { content, textures } = buildStorybookContent(8)
+      const binding = staple.current ? new StapleBookBinding() : new HardcoverBookBinding()
+      const book = new Book({
+        content,
+        ...baseOptions({
+          binding,
+          coverPaperSetup: { ...coverPaperSetup(PAGE_W, PAGE_H), thickness: 0.05, rigid: !staple.current },
+        }),
+      })
+      const open = makeOpenToPage(0)
+      return { book, onFrame: () => open(book), cleanup: () => textures.forEach((t) => t.dispose()) }
+    },
+  })
+  useStorybookArt(rebuild)
+  return (
+    <LiveStage
+      ref={ref}
+      hint="Rigid boards hinge; floppy pages glue to the smooth one-mesh spine"
+      controls={
+        <LiveToggle
+          label="compare staple"
+          checked={staple.current}
+          onChange={(v) => { staple.current = v; force((n) => n + 1); rebuild() }}
         />
       }
     />

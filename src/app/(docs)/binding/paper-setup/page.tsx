@@ -57,6 +57,7 @@ export default async function Page() {
           { name: 'height', type: 'number', def: '2', desc: 'Sheet height in world units (clamped to ≥ 1).' },
           { name: 'thickness', type: 'number', def: '0.0002', desc: 'Sheet thickness. Pages are thin (~0.004), covers thicker (~0.02).' },
           { name: 'stiffness', type: 'number', def: '0.1', desc: 'Resistance to bending while turning. Floppy pages low, stiff covers high.' },
+          { name: 'rigid', type: 'boolean', def: 'false', desc: 'A rigid board never bends — the turn is a pure hinge rotation. Made for hardcover boards; overrides stiffness.' },
           { name: 'quality', type: 'number', def: '3', desc: 'Mesh subdivision level, clamped 1…5. Higher = smoother bend, more geometry.' },
           { name: 'color', type: 'THREE.Color', def: 'white', desc: 'Base tint multiplied with the page texture; keep white to render textures true.' },
           { name: 'material', type: 'THREE.Material | null', def: 'null', desc: 'Override the paper material entirely, or null for the default.' },

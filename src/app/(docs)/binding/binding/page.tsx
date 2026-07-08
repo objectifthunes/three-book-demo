@@ -49,7 +49,8 @@ export default async function Page() {
         label="BINDING TYPES"
         cols={['Type', 'Kind', '', 'Role']}
         rows={[
-          { name: 'StapleBookBinding', type: 'class', desc: 'The built-in spine. Construct it with new StapleBookBinding() and pass as binding. No setup required.' },
+          { name: 'StapleBookBinding', type: 'class', desc: 'The magazine spine: folded sheets with visible staples. Construct with new StapleBookBinding() and pass as binding. No setup required.' },
+          { name: 'HardcoverBookBinding', type: 'class', desc: 'The premium case-bound spine: rigid boards, one smooth cover shell, pages glued to the spine. See its dedicated page for HardcoverSetup.' },
           { name: 'BookBinding', type: 'abstract', desc: 'The base contract: a single createBound(book, root, rendererFactory, meshFactory) factory method. Extend it to author a custom spine.' },
           { name: 'BookBound', type: 'abstract', desc: 'The runtime instance returned by createBound — it positions papers each frame and owns the binder geometry. Subclass it alongside a custom BookBinding.' },
         ]}
