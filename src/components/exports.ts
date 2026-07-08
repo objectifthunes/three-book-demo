@@ -65,7 +65,7 @@ export const EXPORTS: ExportEntry[] = [
 
   // Binding
   { slug: 'binding', name: 'Bindings', group: 'binding', href: '/binding/binding/', lede: 'Two spines out of the box — staple (magazine) and hardcover — plus the BookBinding / BookBound abstraction beneath them.', badge: 'CLASS' },
-  { slug: 'hardcover-book-binding', name: 'HardcoverBookBinding', group: 'binding', href: '/binding/hardcover-book-binding/', lede: 'The premium case-bound spine: pages glued to one smooth cover shell with rigid boards and five texture zones.', badge: 'CLASS' },
+  { slug: 'glued-book-binding', name: 'GluedBookBinding', group: 'binding', href: '/binding/glued-book-binding/', lede: 'The premium case-bound spine: pages glued to one smooth cover shell with rigid boards and five texture zones.', badge: 'CLASS' },
   { slug: 'paper-setup', name: 'PaperSetup', group: 'binding', href: '/binding/paper-setup/', lede: 'Per-book paper geometry: size, thickness, stiffness, quality and material.', badge: 'TYPE' },
 
   // Demo kit

@@ -4,14 +4,14 @@ import { Source } from '@/components/Source'
 import { Notes } from '@/components/Notes'
 import { PropTable } from '@/components/PropTable'
 import { findExport } from '@/components/exports'
-import { LiveHardcover } from '@/components/live/examples'
+import { LiveGlued } from '@/components/live/examples'
 
-const e = findExport('/binding/hardcover-book-binding/')!
+const e = findExport('/binding/glued-book-binding/')!
 
-const CODE = `import { Book, HardcoverBookBinding } from '@objectifthunes/three-book'
+const CODE = `import { Book, GluedBookBinding } from '@objectifthunes/three-book'
 import * as THREE from 'three'
 
-const binding = new HardcoverBookBinding()
+const binding = new GluedBookBinding()
 binding.setup.hingeGap = 0.03        // cloth-joint groove at each board
 binding.setup.glueFlexWidth = 0.12   // page gutter flex zone
 binding.setup.spineColor = new THREE.Color('#7a1f1f')
@@ -27,7 +27,7 @@ const book = new Book({
 export default async function Page() {
   return (
     <ExportPage group={e.group} title={e.name} lede={e.lede}>
-      <LiveHardcover />
+      <LiveGlued />
       <Source code={CODE} lang="ts" />
       <PropTable
         label="HARDCOVERSETUP"

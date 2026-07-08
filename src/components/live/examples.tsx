@@ -7,7 +7,7 @@ import {
   BookContent,
   BookDirection,
   StapleBookBinding,
-  HardcoverBookBinding,
+  GluedBookBinding,
   SpreadContent,
   TextOverlayContent,
   createPageTexture,
@@ -250,14 +250,14 @@ export function LiveBinding() {
 }
 
 /** The hardcover case: rigid boards, one smooth spine, pages glued to it. */
-export function LiveHardcover() {
+export function LiveGlued() {
   const ref = useRef<HTMLDivElement>(null)
   const staple = useRef(false)
   const [, force] = useState(0)
   const { rebuild } = useBookStage(ref, {
     make: () => {
       const { content, textures } = buildStorybookContent(8)
-      const binding = staple.current ? new StapleBookBinding() : new HardcoverBookBinding()
+      const binding = staple.current ? new StapleBookBinding() : new GluedBookBinding()
       const book = new Book({
         content,
         ...baseOptions({
