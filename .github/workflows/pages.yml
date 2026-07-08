@@ -26,9 +26,16 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-      # @objectifthunes/three-book is a private package — authenticate to npm.
+      # @objectifthunes/* are RESTRICTED packages. Metadata reads authenticate
+      # via the scope registry, but the tarball download only carries the token
+      # when always-auth is set — without it the .tgz GET is anonymous and 404s.
       - name: Authenticate to npm
-        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+        run: |
+          {
+            echo "@objectifthunes:registry=https://registry.npmjs.org/"
+            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}"
+            echo "always-auth=true"
+          } >> ~/.npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       # Freshly published restricted tarballs can 404 on the Actions CDN edge
