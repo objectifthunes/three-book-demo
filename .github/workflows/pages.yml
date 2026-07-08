@@ -31,7 +31,15 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: pnpm install --frozen-lockfile
+      # Freshly published restricted tarballs can 404 on the Actions CDN edge
+      # for a few minutes after publish — retry the install through it.
+      - name: Install (retry through npm propagation lag)
+        run: |
+          for i in 1 2 3 4 5 6; do
+            pnpm install --frozen-lockfile && exit 0
+            echo "install attempt $i failed; waiting for npm propagation…"; sleep 30
+          done
+          pnpm install --frozen-lockfile
       - run: pnpm build
       - run: touch out/.nojekyll
       - uses: actions/configure-pages@v5
