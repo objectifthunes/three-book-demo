@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@objectifthunes/three-book':
-        specifier: ^0.5.8
-        version: 0.5.8(three@0.172.0)
+        specifier: ^0.6.0
+        version: 0.6.0(three@0.172.0)
       lucide-react:
         specifier: ^1.17.0
         version: 1.21.0(react@19.2.4)
@@ -430,8 +430,8 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@objectifthunes/three-book@0.5.8':
-    resolution: {integrity: sha512-xa7plb7TuqRm5R/QgbNYkINOu84ASILFW4yvz/L5AYM8MjQOg56PPqb8WTtlNMibe6ddWZhGd1VypG2qpG7iRA==}
+  '@objectifthunes/three-book@0.6.0':
+    resolution: {integrity: sha512-OtKu5m1EZVm4P/zZarfkh2nST1MCs/L3hY33zGSAwCe30Fi4I9Pex0t8Dv9gRCbzX6KRAAh2+G5K1s3+MHgJ3A==}
     peerDependencies:
       three: '>=0.150.0'
 
@@ -2495,7 +2495,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@objectifthunes/three-book@0.5.8(three@0.172.0)':
+  '@objectifthunes/three-book@0.6.0(three@0.172.0)':
     dependencies:
       three: 0.172.0
 

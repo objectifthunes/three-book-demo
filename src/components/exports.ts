@@ -64,7 +64,8 @@ export const EXPORTS: ExportEntry[] = [
   { slug: 'images', name: 'Images & fit', group: 'textures', href: '/textures/images/', lede: 'loadImage, drawImageWithFit, computeDefaultImageRect and the contain / cover / fill modes.', badge: 'UTIL' },
 
   // Binding
-  { slug: 'binding', name: 'Bindings', group: 'binding', href: '/binding/binding/', lede: 'StapleBookBinding out of the box, and the BookBinding / BookBound abstraction beneath it.', badge: 'CLASS' },
+  { slug: 'binding', name: 'Bindings', group: 'binding', href: '/binding/binding/', lede: 'Two spines out of the box — staple (magazine) and hardcover — plus the BookBinding / BookBound abstraction beneath them.', badge: 'CLASS' },
+  { slug: 'hardcover-book-binding', name: 'HardcoverBookBinding', group: 'binding', href: '/binding/hardcover-book-binding/', lede: 'The premium case-bound spine: pages glued to one smooth cover shell with rigid boards and five texture zones.', badge: 'CLASS' },
   { slug: 'paper-setup', name: 'PaperSetup', group: 'binding', href: '/binding/paper-setup/', lede: 'Per-book paper geometry: size, thickness, stiffness, quality and material.', badge: 'TYPE' },
 
   // Demo kit
