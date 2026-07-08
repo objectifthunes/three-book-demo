@@ -64,8 +64,9 @@ export const EXPORTS: ExportEntry[] = [
   { slug: 'images', name: 'Images & fit', group: 'textures', href: '/textures/images/', lede: 'loadImage, drawImageWithFit, computeDefaultImageRect and the contain / cover / fill modes.', badge: 'UTIL' },
 
   // Binding
-  { slug: 'binding', name: 'Bindings', group: 'binding', href: '/binding/binding/', lede: 'Two spines out of the box — staple (magazine) and hardcover — plus the BookBinding / BookBound abstraction beneath them.', badge: 'CLASS' },
-  { slug: 'glued-book-binding', name: 'GluedBookBinding', group: 'binding', href: '/binding/glued-book-binding/', lede: 'The premium case-bound spine: pages glued to one smooth cover shell with rigid boards and five texture zones.', badge: 'CLASS' },
+  { slug: 'binding', name: 'BookBinding & BookBound', group: 'binding', href: '/binding/binding/', lede: 'The binding abstraction, and how to pick a spine — every book takes one via the binding option.', badge: 'CLASS' },
+  { slug: 'staple-book-binding', name: 'StapleBookBinding', group: 'binding', href: '/binding/staple-book-binding/', lede: 'The saddle-stitched magazine spine: folded sheets down a stapled fold. The lightest binding, no setup required.', badge: 'CLASS' },
+  { slug: 'glued-book-binding', name: 'GluedBookBinding', group: 'binding', href: '/binding/glued-book-binding/', lede: 'The case-bound hardcover spine: a glued page block wrapped in rigid boards and one smooth cover shell.', badge: 'CLASS' },
   { slug: 'paper-setup', name: 'PaperSetup', group: 'binding', href: '/binding/paper-setup/', lede: 'Per-book paper geometry: size, thickness, stiffness, quality and material.', badge: 'TYPE' },
 
   // Demo kit

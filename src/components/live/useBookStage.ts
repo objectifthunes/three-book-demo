@@ -81,7 +81,9 @@ export function useBookStage(
     scene.fog = new THREE.Fog(0x6a4a5e, 9, 22)
 
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
-    const camPos = options.camera?.position ?? [0, 3.7, 4.4]
+    // The open book lies flat, spanning x∈[-2,2] with page height along +z, so
+    // its visual centre is ~(0, 0, 1.4) — aim there, not at the spine edge.
+    const camPos = options.camera?.position ?? [0, 4.3, 5.6]
     camera.position.set(...camPos)
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false })
@@ -98,10 +100,11 @@ export function useBookStage(
     const controls = new OrbitControls(camera, renderer.domElement)
     controls.enableDamping = true
     controls.dampingFactor = 0.05
-    controls.enablePan = false
-    controls.minDistance = 2.5
-    controls.maxDistance = 12
-    controls.target.set(...(options.camera?.target ?? [0, 0, 0]))
+    controls.enablePan = true
+    controls.screenSpacePanning = true // pan in the view plane (intuitive)
+    controls.minDistance = 2
+    controls.maxDistance = 16
+    controls.target.set(...(options.camera?.target ?? [0, 0, 1.4]))
 
     // Dusk lighting: warm sky / cool ground bounce, a low golden key that casts
     // long soft shadows, and a cool indigo rim to lift the shadow side.

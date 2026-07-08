@@ -711,12 +711,34 @@ code, kbd, samp { font-family: var(--docs-mono); font-size: 0.85em; }
   width: 100%;
   aspect-ratio: 16 / 10;
   background: #14141f;
-  cursor: grab;
   overflow: hidden;
 }
-.live__stage:active { cursor: grabbing; }
 .live__stage--tall { aspect-ratio: 4 / 3; }
-.live__stage canvas { display: block; }
+.live__canvas {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+}
+.live__canvas:active { cursor: grabbing; }
+.live__canvas canvas { display: block; }
+
+/* Floating spine switch, pinned to the top of the canvas. */
+.live__overlay {
+  position: absolute;
+  top: 0.7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.4rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, #14141f 72%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
 
 .live__hint {
   padding: 0.5rem 0.9rem;

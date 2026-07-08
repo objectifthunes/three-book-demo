@@ -80,11 +80,10 @@ function baseOptions(
   }
 }
 
-/** A segmented staple/hardcover switch shown on every live book canvas. */
+/** A segmented staple/hardcover switch, floated over the top of every canvas. */
 function BindingToggle({ kind, onChange }: { kind: BindingKind; onChange: (k: BindingKind) => void }) {
   return (
     <LiveRow>
-      <LiveReadout label="Spine" value="" />
       <LiveButton active={kind === 'staple'} onClick={() => onChange('staple')}>Staple</LiveButton>
       <LiveButton active={kind === 'glued'} onClick={() => onChange('glued')}>Hardcover</LiveButton>
     </LiveRow>
@@ -102,8 +101,10 @@ function useBoundStage(
   opts?: { deps?: unknown[]; interactive?: boolean; initialKind?: BindingKind },
 ) {
   const [kind, setKind] = useState<BindingKind>(opts?.initialKind ?? 'staple')
+  // The ref is the source of truth make() reads. Set it SYNCHRONOUSLY on click
+  // (before rebuild) so a single press switches — updating it only during
+  // render made rebuild() read the previous kind, needing a second press.
   const kindRef = useRef<BindingKind>(kind)
-  kindRef.current = kind
   const stage = useBookStage(ref, {
     make: () => make(kindRef.current),
     deps: opts?.deps,
@@ -112,7 +113,12 @@ function useBoundStage(
   const control = (
     <BindingToggle
       kind={kind}
-      onChange={(k) => { setKind(k); stage.rebuild() }}
+      onChange={(k) => {
+        if (k === kindRef.current) return // ignore re-clicks on the active spine
+        kindRef.current = k
+        setKind(k)
+        stage.rebuild()
+      }}
     />
   )
   return { ...stage, kind, control }
@@ -131,7 +137,7 @@ export function LiveBook({
     return { book, onFrame: () => open(book), cleanup: () => textures.forEach((t) => t.dispose()) }
   }, { deps: [pageCount] })
   useStorybookArt(rebuild)
-  return <LiveStage ref={ref} hint={hint} controls={control} />
+  return <LiveStage ref={ref} hint={hint} overlay={control} />
 }
 
 /** Programmatic page turns via book.startAutoTurning(). */
@@ -150,9 +156,9 @@ export function LiveAutoTurn() {
     <LiveStage
       ref={ref}
       hint="Each button calls book.startAutoTurning(direction, settings, count)"
+      overlay={control}
       controls={
         <>
-          {control}
           <LiveRow>
             <LiveButton onClick={() => turn(AutoTurnDirection.Next, 1)}>Next ▸</LiveButton>
             <LiveButton onClick={() => turn(AutoTurnDirection.Back, 1)}>◂ Prev</LiveButton>
@@ -180,9 +186,9 @@ export function LiveOpenProgress() {
     <LiveStage
       ref={ref}
       hint="The slider calls book.setOpenProgress(t) — 0 is closed, 1 is fully open"
+      overlay={control}
       controls={
         <>
-          {control}
           <LiveSlider label="openProgress" min={0} max={1} step={0.01} value={v} onChange={onChange} format={(x) => x.toFixed(2)} />
         </>
       }
@@ -212,9 +218,9 @@ export function LiveBookState() {
     <LiveStage
       ref={ref}
       hint="Drag a page — these getters are read off the book every frame"
+      overlay={control}
       controls={
         <>
-          {control}
           <LiveRow>
             <LiveReadout label="isTurning" value={String(s.turning)} />
             <LiveReadout label="isFalling" value={String(s.falling)} />
@@ -254,9 +260,9 @@ export function LiveGeometry() {
       ref={ref}
       tall
       hint="Every control rebuilds the Book with new BookOptions — drag a page to feel the change"
+      overlay={control}
       controls={
         <>
-          {control}
           <LiveRow>
             <LiveSlider label="pages" min={2} max={20} step={2} value={p.pageCount} onChange={(v) => set('pageCount', v)} />
             <LiveSlider label="thickness" min={0.008} max={0.05} step={0.002} value={p.thickness} onChange={(v) => set('thickness', v)} format={(x) => x.toFixed(3)} />
@@ -288,9 +294,9 @@ export function LiveBinding() {
     <LiveStage
       ref={ref}
       hint="Flip the spine: Staple draws staples down the fold, Hardcover wraps a glued block in rigid boards. hideBinder removes the binder mesh."
+      overlay={control}
       controls={
         <>
-          {control}
           <LiveToggle
             label="hideBinder"
             checked={hide.current}
@@ -316,7 +322,7 @@ export function LiveGlued() {
     <LiveStage
       ref={ref}
       hint="Rigid boards hinge; floppy pages glue to the smooth one-mesh spine. Flip to Staple to compare."
-      controls={control}
+      overlay={control}
     />
   )
 }
@@ -357,9 +363,9 @@ export function LiveTextures() {
     <LiveStage
       ref={ref}
       hint="createPageTexture draws the image onto page 1 with the chosen fit mode"
+      overlay={control}
       controls={
         <>
-          {control}
           <LiveRow>
             {(['contain', 'cover', 'fill'] as const).map((f) => (
               <LiveButton key={f} active={cfg.current.fit === f} onClick={() => setFit(f)}>{f}</LiveButton>
@@ -402,9 +408,9 @@ export function LiveTextOverlay() {
     <LiveStage
       ref={ref}
       hint="A TextOverlayContent composites a styled TextBlock onto page 1"
+      overlay={control}
       controls={
         <>
-          {control}
           <LiveRow>
             {['Chapter One', 'Once upon a time', 'The End'].map((t) => (
               <LiveButton key={t} active={text.current === t} onClick={() => pick(t)}>{t}</LiveButton>
@@ -449,5 +455,5 @@ export function LiveSpread() {
     }
   })
   const imgRef = usePatternImage(rebuild)
-  return <LiveStage ref={ref} hint="A SpreadContent puts one image across the two facing pages — drag to leaf through" controls={control} />
+  return <LiveStage ref={ref} hint="A SpreadContent puts one image across the two facing pages — drag to leaf through" overlay={control} />
 }
