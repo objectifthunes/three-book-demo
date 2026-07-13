@@ -43,9 +43,9 @@ export default async function Page() {
           <Link href="/book/book-options/">BookOptions</Link> <code>binding</code> is all it takes.
         </p>
         <p>
-          For the premium, rigid-boarded look see{' '}
-          <Link href="/binding/glued-book-binding/">GluedBookBinding</Link> — use the{' '}
-          <strong>spine toggle</strong> on the canvas above to compare the two, and{' '}
+          For a glued spine with the same adjustable cover softness, see{' '}
+          <Link href="/binding/glued-book-binding/">GluedBookBinding</Link> and compare it in the{' '}
+          <Link href="/play/glued-spine/">Glued spine playground</Link>. Use{' '}
           <code>hideBinder</code> to drop the staple mesh.
         </p>
       </Notes>

@@ -58,7 +58,7 @@ export default async function Page() {
         <p>
           To turn pages by dragging, add <Link href="/turning/interaction/">BookPointerInteraction</Link>. To skip
           the boilerplate in step 1 entirely, use <Link href="/demokit/demo-scene/">createDemoScene()</Link> from
-          the <code>/demo-kit</code> entry — that is exactly what the <Link href="/start/playground/">playground</Link>{' '}
+          the <code>/demo-kit</code> entry — that is exactly what the <Link href="/play/glued-spine/">glued spine playground</Link>{' '}
           do. When you tear the book down, always call <Link href="/book/lifecycle/"><code>book.dispose()</code></Link>.
         </p>
       </Notes>

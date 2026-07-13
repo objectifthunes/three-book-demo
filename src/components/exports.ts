@@ -1,7 +1,7 @@
 export type Badge = 'FULL-SCREEN' | 'CLASS' | 'UTIL' | 'TYPE'
 
 export const LIB_NAME = '@objectifthunes/three-book'
-export const LIB_VERSION = '0.5.8'
+export const LIB_VERSION = '0.8.1'
 export const NPM_URL = 'https://www.npmjs.com/package/@objectifthunes/three-book'
 export const REPO_URL = 'https://github.com/objectifthunes/three-book'
 
@@ -40,7 +40,7 @@ export const GROUPS: { id: GroupId; label: string }[] = [
 export const EXPORTS: ExportEntry[] = [
   // Playgrounds — the two flagship canvases; every other page is snippet-first.
   { slug: 'staple', name: 'Staple playground', group: 'play', href: '/play/staple/', lede: 'The magazine binding with every option live: paper, staples, turning, and text you type straight onto the book.', badge: 'FULL-SCREEN' },
-  { slug: 'hardcover', name: 'Hardcover playground', group: 'play', href: '/play/hardcover/', lede: 'The glued case binding with every option live: rigid boards, spine setup, turning, and WYSIWYG titles.', badge: 'FULL-SCREEN' },
+  { slug: 'glued-spine', name: 'Glued spine playground', group: 'play', href: '/play/glued-spine/', lede: 'The glued spine binding with every option live: cover softness, spine setup, turning, and WYSIWYG titles.', badge: 'FULL-SCREEN' },
 
   // Getting started
   { slug: 'quick-start', name: 'Quick start', group: 'start', href: '/start/quick-start/', lede: 'Mount a realistic 3D page-turning book into a Three.js scene in about twenty lines.' },
@@ -71,7 +71,7 @@ export const EXPORTS: ExportEntry[] = [
   // Binding
   { slug: 'binding', name: 'BookBinding & BookBound', group: 'binding', href: '/binding/binding/', lede: 'The binding abstraction, and how to pick a spine — every book takes one via the binding option.', badge: 'CLASS' },
   { slug: 'staple-book-binding', name: 'StapleBookBinding', group: 'binding', href: '/binding/staple-book-binding/', lede: 'The saddle-stitched magazine spine: folded sheets down a stapled fold. The lightest binding, no setup required.', badge: 'CLASS' },
-  { slug: 'glued-book-binding', name: 'GluedBookBinding', group: 'binding', href: '/binding/glued-book-binding/', lede: 'The case-bound hardcover spine: a glued page block wrapped in rigid boards and one smooth cover shell.', badge: 'CLASS' },
+  { slug: 'glued-book-binding', name: 'GluedBookBinding', group: 'binding', href: '/binding/glued-book-binding/', lede: 'A glued page block wrapped by one smooth, stiffness-controlled cover mesh.', badge: 'CLASS' },
   { slug: 'paper-setup', name: 'PaperSetup', group: 'binding', href: '/binding/paper-setup/', lede: 'Per-book paper geometry: size, thickness, stiffness, quality and material.', badge: 'TYPE' },
 
   // Demo kit

@@ -81,7 +81,7 @@ export default async function Page() {
         <p>
           <code>/demo-kit</code> is an <em>optional</em>, batteries-included layer that sits on top of{' '}
           <code>@objectifthunes/three-book</code>. None of it is needed to render a book — but it is exactly
-          what powers this site&apos;s <Link href="/start/playground/">playground</Link>, so it gets you from zero
+          what powers this site&apos;s <Link href="/play/glued-spine/">glued spine playground</Link>, so it gets you from zero
           to an interactive demo in a handful of lines.
         </p>
         <p>

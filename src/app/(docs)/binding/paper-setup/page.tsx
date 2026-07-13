@@ -57,7 +57,7 @@ export default async function Page() {
           { name: 'height', type: 'number', def: '2', desc: 'Sheet height in world units (clamped to ≥ 1).' },
           { name: 'thickness', type: 'number', def: '0.0002', desc: 'Sheet thickness. Pages are thin (~0.004), covers thicker (~0.02).' },
           { name: 'stiffness', type: 'number', def: '0.1', desc: 'Resistance to bending while turning. Floppy pages low, stiff covers high.' },
-          { name: 'rigid', type: 'boolean', def: 'false', desc: 'A rigid board never bends — the turn is a pure hinge rotation. Made for hardcover boards; overrides stiffness.' },
+          { name: 'rigid', type: 'boolean', def: 'false', desc: 'A rigid cover never bends — the turn is a pure hinge rotation. Available for glued and staple bindings; overrides stiffness.' },
           { name: 'quality', type: 'number', def: '3', desc: 'Mesh subdivision level, clamped 1…5. Higher = smoother bend, more geometry.' },
           { name: 'color', type: 'THREE.Color', def: 'white', desc: 'Base tint multiplied with the page texture; keep white to render textures true.' },
           { name: 'material', type: 'THREE.Material | null', def: 'null', desc: 'Override the paper material entirely, or null for the default.' },
@@ -89,10 +89,10 @@ export default async function Page() {
           A <code>PaperSetup</code> is geometry only — it has no idea what is printed on the sheet
           (that is page <Link href="/content/book-content/">content</Link> and{' '}
           <Link href="/textures/page-textures/">textures</Link>). The two values you tune most are{' '}
-          <code>thickness</code> and <code>stiffness</code>: pages are typically thin and floppy
-          (<code>thickness ~0.004</code>, low <code>stiffness ~12</code>) while covers are thick and
-          rigid (<code>thickness ~0.02</code>, high <code>stiffness ~30</code>). That contrast is what
-          makes covers hold their shape while pages flop realistically through a turn.
+          <code>thickness</code> and <code>stiffness</code>: pages are typically thin and flexible
+          (<code>thickness ~0.004</code>, <code>stiffness ~0.2</code>) while covers are thicker and
+          often stiffer (<code>thickness ~0.02</code>, <code>stiffness ~0.75</code>). Both staple and
+          glued-spine covers use this same 0…1 stiffness range; <code>rigid</code> is only an override.
         </p>
         <p>
           Most code never constructs <code>PaperSetup</code> directly: you hand the lighter{' '}

@@ -20,7 +20,8 @@ binding.setup.spineTexture = spineCanvasTexture // title art down the spine
 const book = new Book({
   content, // covers[0..3] map to front / inner front / inner back / back
   binding,
-  coverPaperSetup: { width: 2.15, height: 3.15, thickness: 0.06, rigid: true },
+  // One modular cover: lower stiffness is softer; rigid is an optional override.
+  coverPaperSetup: { width: 2.15, height: 3.15, thickness: 0.06, stiffness: 0.75, rigid: false },
   pagePaperSetup: { width: 2, height: 3, thickness: 0.03, stiffness: 0.2 },
 })`
 
@@ -30,7 +31,7 @@ export default async function Page() {
       <PlaygroundCta />
       <Source code={CODE} lang="ts" />
       <PropTable
-        label="HARDCOVERSETUP"
+        label="GLUEDSETUP (binding.setup)"
         cols={['Prop', 'Type', 'Default', 'Role']}
         rows={[
           { name: 'hingeGap', type: 'number', def: '0.03', desc: 'Cloth-joint groove between each board and the spine, in world units.' },
@@ -43,22 +44,23 @@ export default async function Page() {
       />
       <Notes>
         <p>
-          The case — front board, spine and back board — is <strong>one mesh</strong>: a
-          constant-thickness shell bent around the block like a manga cover, with a single smooth
-          spine curve that follows the covers at every opening angle. Pages are glued to the actual
-          spine surface, so the block and case read as one object closed or open.
+          The front cover, spine and back cover are <strong>one mesh</strong>: a
+          constant-thickness shell bent around the block, with a single smooth spine curve that
+          follows the covers at every opening angle. Pages are glued to the actual spine surface,
+          so the block and cover read as one object closed or open.
         </p>
         <p>
-          Five zones of that mesh take real content: the four cover surfaces map{' '}
+          Five zones of that one mesh take real content: the four cover surfaces map{' '}
           <code>covers[0..3]</code> (front, inner front, inner back, back) exactly as they do on
           other bindings, and the spine takes <code>setup.spineTexture</code>. Hinges, fore edges
           and caps use the cloth colour or material.
         </p>
         <p>
-          Set <code>rigid: true</code> on the <Link href="/binding/paper-setup/">cover paper
-          setup</Link> so the boards turn as stiff hinged plates, and keep pages floppy — that
-          contrast is what makes the hardcover feel premium. The staple binding is untouched;
-          pick either per book via the <code>binding</code> option.
+          Cover softness is modular, not a second book type. Set <code>stiffness</code> on the{' '}
+          <Link href="/binding/paper-setup/">cover paper setup</Link> exactly as you do for a
+          staple-bound cover; the one-piece glued cover follows that deformation. Set{' '}
+          <code>rigid: true</code> only when you want a fully rigid cover. Pick the glued or staple
+          spine per book via the <code>binding</code> option.
         </p>
       </Notes>
     </ExportPage>

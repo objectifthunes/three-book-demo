@@ -19,8 +19,8 @@ export default async function Page() {
           WYSIWYG editor.
         </p>
         <p>
-          The hardcover twin lives in the{' '}
-          <Link href="/play/hardcover/">Hardcover playground</Link>. For the API behind each
+          The glued-spine twin lives in the{' '}
+          <Link href="/play/glued-spine/">Glued spine playground</Link>. For the API behind each
           control, every docs page links back here.
         </p>
       </Notes>

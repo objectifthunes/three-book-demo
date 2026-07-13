@@ -46,7 +46,7 @@ export default async function HomePage() {
           editable text. Every export documented, with working examples you can run in the browser.
         </p>
         <div className="landing__hero-actions">
-          <Link className="landing__cta landing__cta--primary" href="/start/playground/">Open the playground ↗</Link>
+          <Link className="landing__cta landing__cta--primary" href="/play/glued-spine/">Open the glued spine playground ↗</Link>
           <Link className="landing__cta" href="/start/quick-start/">Quick start</Link>
           <a className="landing__cta" href={NPM_URL} target="_blank" rel="noopener noreferrer">npm</a>
         </div>
@@ -89,7 +89,7 @@ export default async function HomePage() {
             <Eyebrow icon={<PlayCircle size={12} strokeWidth={1.75} />}>SEE IT MOVE</Eyebrow>
             <h2 className="landing__skill-title">Live, all the way down.</h2>
           </div>
-          <Link className="landing__skill-cta" href="/start/playground/">Open playground</Link>
+          <Link className="landing__skill-cta" href="/play/glued-spine/">Open glued spine playground</Link>
         </div>
         <p style={{ color: 'var(--ot-text-secondary)', fontSize: 14 }}>
           Every page on this site embeds the feature it documents as a real, interactive 3D example — drag a page

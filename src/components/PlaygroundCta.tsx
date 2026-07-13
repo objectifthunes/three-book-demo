@@ -12,7 +12,7 @@ export function PlaygroundCta() {
       <span>
         See it live in the{' '}
         <Link href="/play/staple/">Staple playground</Link> or the{' '}
-        <Link href="/play/hardcover/">Hardcover playground</Link> — every option on this page is a control there.
+        <Link href="/play/glued-spine/">Glued spine playground</Link> — every option on this page is a control there.
       </span>
     </p>
   )

@@ -46,6 +46,7 @@ interface Params {
   pageThickness: number
   stiffness: number
   coverThickness: number
+  coverSoftness: number
   rigid: boolean
   // book
   alignToGround: boolean
@@ -71,7 +72,8 @@ function defaults(kind: PlaygroundKind): Params {
     pageThickness: 0.02,
     stiffness: 0.2,
     coverThickness: kind === 'glued' ? 0.06 : 0.04,
-    rigid: kind === 'glued',
+    coverSoftness: kind === 'glued' ? 0.25 : 0.5,
+    rigid: false,
     alignToGround: true,
     hideBinder: false,
     stapleCount: 4,
@@ -167,7 +169,12 @@ export function Playground({ kind }: { kind: PlaygroundKind }) {
         alignToGround: cfg.alignToGround,
         hideBinder: cfg.hideBinder,
         pagePaperSetup: { ...pagePaperSetup(PAGE_W, PAGE_H), thickness: cfg.pageThickness, stiffness: cfg.stiffness },
-        coverPaperSetup: { ...coverPaperSetup(PAGE_W, PAGE_H), thickness: cfg.coverThickness, rigid: cfg.rigid },
+        coverPaperSetup: {
+          ...coverPaperSetup(PAGE_W, PAGE_H),
+          thickness: cfg.coverThickness,
+          stiffness: 1 - cfg.coverSoftness,
+          rigid: cfg.rigid,
+        },
       })
 
       let opened = false
@@ -225,8 +232,9 @@ export function Playground({ kind }: { kind: PlaygroundKind }) {
             <LiveSlider label="page thickness" min={0.008} max={0.05} step={0.002} value={v.pageThickness} onChange={(x) => set('pageThickness', x)} format={(x) => x.toFixed(3)} />
             <LiveSlider label="stiffness" min={0.05} max={0.9} step={0.05} value={v.stiffness} onChange={(x) => set('stiffness', x)} format={(x) => x.toFixed(2)} />
             <LiveSlider label="cover thickness" min={0.02} max={0.1} step={0.005} value={v.coverThickness} onChange={(x) => set('coverThickness', x)} format={(x) => x.toFixed(3)} />
+            <LiveSlider label="cover softness" min={0} max={1} step={0.05} value={v.coverSoftness} onChange={(x) => set('coverSoftness', x)} format={(x) => x.toFixed(2)} />
             {kind === 'glued'
-              ? <LiveToggle label="rigid boards" checked={v.rigid} onChange={(x) => set('rigid', x)} />
+              ? <LiveToggle label="rigid cover" checked={v.rigid} onChange={(x) => set('rigid', x)} />
               : <LiveToggle label="hideBinder" checked={v.hideBinder} onChange={(x) => set('hideBinder', x)} />}
             <LiveToggle label="alignToGround" checked={v.alignToGround} onChange={(x) => set('alignToGround', x)} />
           </LiveRow>
